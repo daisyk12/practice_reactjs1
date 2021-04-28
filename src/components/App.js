@@ -36,7 +36,7 @@ class App extends Component {
   GET = async () => {
     try {
       //取得數據庫http://localhost:5555/items的數據
-      const Data = await axios.get("http://localhost:5555/items");
+      const Data = await axios.get("http://127.0.0.1:7001/getDB");
       console.log(Data.data);
       const items = Data.data.map((item) => {
         return Object.assign({}, item, { isEditing: false })
@@ -55,19 +55,19 @@ class App extends Component {
 POST = (aItem: Item) => {
   const { id, title, isCompleted } = aItem
   const payload = { id, title, isCompleted }
-  axios.post("http://localhost:5555/items",payload);
+  axios.post("http://127.0.0.1:7001/addDB",payload);
 };
 PUT = (aItem: Item) => {
   //處理payload，不需要isEditing欄位
   const { id, title, isCompleted } = aItem
   const payload = { id, title, isCompleted }
-  axios.put(`http://localhost:5555/items/${id}`,payload)
+  axios.put(`http://127.0.0.1:7001/updateDB/${id}`,payload)
 };
 //待修改
 Delete = (aItem: Item) => {
   const { id, title, isCompleted } = aItem
   const payload = { id, title, isCompleted }
-  axios.delete(`http://localhost:5555/items/${id}`,payload)
+  axios.delete(`http://127.0.0.1:7001/removeDB/${id}`,payload)
 };
 
   handleItemAdd = (aItem: Item) => {
